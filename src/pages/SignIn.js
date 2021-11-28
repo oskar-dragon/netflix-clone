@@ -13,8 +13,11 @@ export default function SignIn() {
   const [isInvalid, setIsInvalid] = useState(true);
 
   useEffect(() => {
-    if (userData.emailAddress !== "" && userData.password !== "")
+    if (userData.emailAddress !== "" && userData.password !== "") {
       setIsInvalid(false);
+    } else {
+      setIsInvalid(true);
+    }
   }, [userData.emailAddress, userData.password]);
 
   function handleSignIn(e) {
@@ -23,7 +26,6 @@ export default function SignIn() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    console.log(userData);
     setUserData(prevUserData => ({ ...prevUserData, [name]: value }));
   }
 
