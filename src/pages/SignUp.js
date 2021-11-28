@@ -27,7 +27,7 @@ export default function SignUp() {
 
   useEffect(() => {
     if (
-      userData.emailAddress !== "" &&
+      userData.email !== "" &&
       userData.password !== "" &&
       userData.firstName !== ""
     ) {
@@ -43,7 +43,7 @@ export default function SignUp() {
         <Form>
           {error && <Form.Error>{error}</Form.Error>}
 
-          <Form.Base onSubmit={handleSignUp}>
+          <Form.Base onSubmit={handleSignUp} method="POST">
             <Form.Title>Sign Up</Form.Title>
             <Form.Input
               type="text"
