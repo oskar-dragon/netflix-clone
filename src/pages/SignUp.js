@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { HeaderContainer } from "../containers/Header";
 import { FooterContainer } from "../containers/Footer";
 import { Form } from "../components";
 import { SIGN_IN } from "../constants/routes";
+import { AuthContext } from "../context/AuthContext";
+import * as ROUTES from "../constants/routes";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     firstName: "",
     email: "",
@@ -12,9 +16,29 @@ export default function SignUp() {
   });
   const [isInvalid, setIsInvalid] = useState(true);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { signUp } = useContext(AuthContext);
 
   function handleSignUp(e) {
     e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    signUp(userData.email, userData.password)
+      .then(res => {
+        res.user
+          .updateProfile({
+            displayName: userData.firstName,
+            photoURL: Math.floor(Math.random() * 5) + 1,
+          })
+          .then(() => {
+            setUserData({ firstName: "", email: "", password: "" });
+            navigate(ROUTES.BROWSE);
+          });
+      })
+      .catch(error => {
+        setError("Failed to create an account");
+      });
   }
 
   function handleChange(e) {
@@ -41,10 +65,10 @@ export default function SignUp() {
     <>
       <HeaderContainer>
         <Form>
-          {error && <Form.Error>{error}</Form.Error>}
-
           <Form.Base onSubmit={handleSignUp} method="POST">
             <Form.Title>Sign Up</Form.Title>
+            {error && <Form.Error>{error}</Form.Error>}
+
             <Form.Input
               type="text"
               name="firstName"
@@ -67,7 +91,7 @@ export default function SignUp() {
               onChange={handleChange}
             />
 
-            <Form.Submit disabled={isInvalid}>Sign Up</Form.Submit>
+            <Form.Submit disabled={isInvalid || loading}>Sign Up</Form.Submit>
             <Form.Text>
               Already a user? <Form.Link to={SIGN_IN}>Sign in</Form.Link>.
             </Form.Text>
