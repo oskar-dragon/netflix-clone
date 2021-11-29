@@ -5,7 +5,15 @@ export const Container = styled.div`
   margin-bottom: 12em;
 `;
 
-export const Error = styled.div``;
+export const Error = styled.div`
+  background: #e87c03;
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
+  padding: 0.8em;
+  border-radius: 5px;
+  margin-bottom: 1em;
+`;
 
 export const Base = styled.form`
   margin: 0 auto;
@@ -79,13 +87,3 @@ export const Link = styled(ReachRouterLink)`
     text-decoration: underline;
   }
 `;
-
-// Container,
-// InputText,
-// InputSubmit,
-// Error,
-// Base,
-// Title,
-// Text,
-// TextSmall,
-// Link,
