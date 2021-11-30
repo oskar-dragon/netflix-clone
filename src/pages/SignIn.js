@@ -1,27 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form } from "../components";
 import { HeaderContainer } from "../containers/Header";
 import { FooterContainer } from "../containers/Footer";
-import { SIGN_UP } from "../constants/routes";
+import * as ROUTES from "../constants/routes";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function SignIn() {
   const [error, setError] = useState(null);
   const [userData, setUserData] = useState({
-    emailAddress: "",
+    email: "",
     password: "",
   });
   const [isInvalid, setIsInvalid] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { signIn } = useContext(AuthContext);
 
   useEffect(() => {
-    if (userData.emailAddress !== "" && userData.password !== "") {
+    if (userData.email !== "" && userData.password !== "") {
       setIsInvalid(false);
     } else {
       setIsInvalid(true);
     }
-  }, [userData.emailAddress, userData.password]);
+  }, [userData.email, userData.password]);
 
   function handleSignIn(e) {
     e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    signIn(userData.email, userData.password)
+      .then(() => {
+        setUserData({ email: "", password: "" });
+        navigate(ROUTES.BROWSE);
+      })
+      .catch(error => {
+        setError("Failed to log in");
+      });
+
+    setLoading(false);
   }
 
   function handleChange(e) {
@@ -33,15 +51,14 @@ export default function SignIn() {
     <>
       <HeaderContainer>
         <Form>
-          {error && <Form.Error>{error}</Form.Error>}
-
           <Form.Base onSubmit={handleSignIn} method="POST">
             <Form.Title>Sign In</Form.Title>
+            {error && <Form.Error>{error}</Form.Error>}
             <Form.Input
               type="email"
-              name="emailAddress"
+              name="email"
               placeholder="Email address"
-              value={userData.emailAddress}
+              value={userData.email}
               onChange={handleChange}
             />
             <Form.Input
@@ -51,10 +68,11 @@ export default function SignIn() {
               value={userData.password}
               onChange={handleChange}
             />
-            <Form.Submit disabled={isInvalid}>Sign In</Form.Submit>
+            <Form.Submit disabled={isInvalid || loading}>Sign In</Form.Submit>
 
             <Form.Text>
-              New to Netflix? <Form.Link to={SIGN_UP}>Sign up now</Form.Link>
+              New to Netflix?{" "}
+              <Form.Link to={ROUTES.SIGN_UP}>Sign up now</Form.Link>
             </Form.Text>
 
             <Form.TextSmall>
