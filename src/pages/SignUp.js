@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { HeaderContainer } from "../containers/Header";
 import { FooterContainer } from "../containers/Footer";
 import { Form } from "../components";
-import { SIGN_IN } from "../constants/routes";
 import { AuthContext } from "../context/AuthContext";
 import * as ROUTES from "../constants/routes";
 
@@ -33,12 +32,14 @@ export default function SignUp() {
           })
           .then(() => {
             setUserData({ firstName: "", email: "", password: "" });
-            navigate(ROUTES.BROWSE);
+            navigate(ROUTES.SIGN_IN);
           });
       })
       .catch(error => {
         setError("Failed to create an account");
       });
+
+    setLoading(false);
   }
 
   function handleChange(e) {
@@ -46,8 +47,6 @@ export default function SignUp() {
 
     setUserData(prevData => ({ ...prevData, [name]: value }));
   }
-
-  //TODO: use useEffect to listen to input values to change isInvalid state
 
   useEffect(() => {
     if (
@@ -93,7 +92,8 @@ export default function SignUp() {
 
             <Form.Submit disabled={isInvalid || loading}>Sign Up</Form.Submit>
             <Form.Text>
-              Already a user? <Form.Link to={SIGN_IN}>Sign in</Form.Link>.
+              Already a user? <Form.Link to={ROUTES.SIGN_IN}>Sign in</Form.Link>
+              .
             </Form.Text>
 
             <Form.TextSmall>
