@@ -10,6 +10,7 @@ export function seedDatabase(firebase) {
   /* Series
     ============================================ */
   // Documentaries
+
   firebase.firestore().collection("series").add({
     id: getUUID(),
     title: "Tiger King",

@@ -90,7 +90,9 @@ export default function SignUp() {
               onChange={handleChange}
             />
 
-            <Form.Submit disabled={isInvalid || loading}>Sign Up</Form.Submit>
+            <Form.Submit disabled={isInvalid ? true : loading ? true : false}>
+              Sign Up
+            </Form.Submit>
             <Form.Text>
               Already a user? <Form.Link to={ROUTES.SIGN_IN}>Sign in</Form.Link>
               .
