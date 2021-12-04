@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ToggleContext } from "../../context/useToggle";
+import { ToggleContext } from "../../context/Toggle";
 import {
   Title,
   Header,

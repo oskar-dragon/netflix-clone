@@ -1,7 +1,7 @@
 import React from "react";
 import { Accordion, OptForm } from "../components";
 import faqsData from "../fixtures/faqs.json";
-import { ToggleContextProvider } from "../context/useToggle";
+import { ToggleContextProvider } from "../context/Toggle";
 
 export function FAQsContainer() {
   return (

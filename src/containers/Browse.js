@@ -11,7 +11,7 @@ export function BrowseContainer() {
   const [category, setCategory] = useState("series");
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const { signOut } = useContext(AuthContext);
+  const { signOutUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const user = {
@@ -26,7 +26,7 @@ export function BrowseContainer() {
   }, [user]);
 
   function handleSignOut() {
-    signOut().then(() => {
+    signOutUser().then(() => {
       navigate(ROUTES.HOME);
     });
   }
