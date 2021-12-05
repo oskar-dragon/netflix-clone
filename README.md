@@ -2,7 +2,9 @@ Technologies Overview
 
 - React
 - Styled Components (CSS in JS)
-- Firebase
+- Firebase (Auth and DB)
+- Fuse
+- React Router
 
 TODO:
 
