@@ -2,7 +2,7 @@ import styled, { createGlobalStyle } from "styled-components";
 
 export const ReleaseBody = createGlobalStyle`
   body {
-    overflow: hidden;
+    overflow: visible;
   }
 `;
 
