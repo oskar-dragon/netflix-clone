@@ -5,7 +5,7 @@ export const Background = styled.div`
   display: flex;
   flex-direction: column;
   background: url(${({ src }) =>
-      src ? `../images/misc/${src}.jpg` : "../images/misc/home-bg.jpg"})
+      src ? `/images/misc/${src}.jpg` : "/images/misc/home-bg.jpg"})
     top left / cover no-repeat;
 
   @media (max-width: 1100px) {
@@ -147,8 +147,8 @@ export const SearchInput = styled.input`
   height: 30px;
   font-size: 0.9rem;
   padding-left: 0.5em;
-  margin-left: ${({ active }) => (active === true ? "0.7142" : "0")};
-  padding: ${({ active }) => (active === true ? "0 0.7142" : "0")};
+  margin-left: ${({ active }) => (active === true ? "0.7142em" : "0")};
+  padding: ${({ active }) => (active === true ? "0 0.7142em" : "0")};
   opacity: ${({ active }) => (active === true ? "1" : "0")};
   width: ${({ active }) => (active === true ? "200px" : "0")};
 
