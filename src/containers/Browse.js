@@ -1,16 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Header, Loading } from "../components";
+import { Header, Loading, Card } from "../components";
 import * as ROUTES from "../constants/routes";
 import { AuthContext } from "../context/AuthContext";
 import { SelectProfileContainer } from "./Profiles";
 import { FooterContainer } from "./Footer";
 
-export function BrowseContainer() {
+export function BrowseContainer({ slides }) {
   const [profile, setProfile] = useState({});
   const [category, setCategory] = useState("series");
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [slidesRows, setSlideRows] = useState([]);
   const { signOutUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -24,6 +25,10 @@ export function BrowseContainer() {
       setLoading(false);
     }, 3000);
   }, [user]);
+
+  useEffect(() => {
+    setSlideRows(slides[category]);
+  }, [slides, category]);
 
   function handleSignOut() {
     signOutUser().then(() => {
@@ -84,6 +89,31 @@ export function BrowseContainer() {
           <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
       </Header>
+
+      <Card.Group>
+        {slidesRows.map(slideItem => (
+          <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+            <Card.Title>{slideItem.title}</Card.Title>
+            <Card.Entities>
+              {slideItem.data.map(item => (
+                <Card.Item key={item.id} item={item}>
+                  <Card.Image
+                    src={`images/${category}/${item.genre}/${item.slug}/small.jpg`}
+                  />
+                  <Card.Meta>
+                    <Card.SubTitle>{item.title}</Card.SubTitle>
+                    <Card.Text>{item.description}</Card.Text>
+                  </Card.Meta>
+                </Card.Item>
+              ))}
+            </Card.Entities>
+
+            <Card.Feature category={category}>
+              <p>I am a feature</p>
+            </Card.Feature>
+          </Card>
+        ))}
+      </Card.Group>
       <FooterContainer />
     </>
   ) : (
