@@ -31,11 +31,11 @@ export default function SignUp() {
             photoURL: Math.floor(Math.random() * 5) + 1,
           })
           .then(() => {
-            setUserData({ firstName: "", email: "", password: "" });
             navigate(ROUTES.SIGN_IN);
           });
       })
       .catch(error => {
+        setUserData({ firstName: "", email: "", password: "" });
         setError("Failed to create an account");
       });
 

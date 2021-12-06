@@ -3,7 +3,7 @@ import { Form } from "../components";
 import { HeaderContainer } from "../containers/Header";
 import { FooterContainer } from "../containers/Footer";
 import * as ROUTES from "../constants/routes";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default function SignIn() {
@@ -15,6 +15,7 @@ export default function SignIn() {
   const [isInvalid, setIsInvalid] = useState(true);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { state } = useLocation();
   const { signIn } = useContext(AuthContext);
 
   useEffect(() => {
@@ -32,10 +33,10 @@ export default function SignIn() {
 
     signIn(userData.email, userData.password)
       .then(() => {
-        setUserData({ email: "", password: "" });
-        navigate(ROUTES.BROWSE);
+        navigate(state?.path || ROUTES.BROWSE);
       })
       .catch(error => {
+        setUserData({ email: "", password: "" });
         setError("Failed to log in");
       });
 
