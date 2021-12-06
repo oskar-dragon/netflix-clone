@@ -1,5 +1,4 @@
 import React, { useState, createContext } from "react";
-import ReactDOM from "react-dom";
 
 const PlayerContext = createContext();
 
