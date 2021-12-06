@@ -10,6 +10,7 @@ import {
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
+  const [authed, setAuthed] = useState(false);
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -18,10 +19,12 @@ function AuthProvider({ children }) {
   }
 
   function signIn(email, password) {
+    setAuthed(true);
     return signInWithEmailAndPassword(auth, email, password);
   }
 
   function signOutUser() {
+    setAuthed(false);
     return signOut(auth);
   }
 
@@ -36,6 +39,7 @@ function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    authed,
     signUp,
     signIn,
     signOutUser,
