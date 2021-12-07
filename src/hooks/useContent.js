@@ -23,7 +23,7 @@ export default function useContent(target) {
       .catch(error => {
         console.log(error.message);
       });
-  }, []);
+  }, [target]);
 
   return { [target]: content };
 }
