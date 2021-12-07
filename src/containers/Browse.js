@@ -25,7 +25,7 @@ export function BrowseContainer({ slides }) {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     setSlideRows(slides[category]);
