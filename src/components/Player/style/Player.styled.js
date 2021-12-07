@@ -57,19 +57,20 @@ export const Close = styled.a`
 
 export const Button = styled.button`
   background-color: #e50914;
-  border-color: #ff0a16;
-  width: 115px;
-  height: 45px;
+  padding: 0.8em 1.5em;
+  border: none;
   text-transform: uppercase;
   font-weight: bold;
   color: white;
   font-size: 1.125rem;
-  height: 45px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 0;
+
+  @media (max-width: 1000px) {
+    font-size: 1rem;
+  }
 
   &:hover {
     transform: scale(1.05);
