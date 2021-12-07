@@ -24,19 +24,13 @@ export default function SignUp() {
     setLoading(true);
 
     signUp(userData.email, userData.password)
-      .then(res => {
-        res.user
-          .updateProfile({
-            displayName: userData.firstName,
-            photoURL: Math.floor(Math.random() * 5) + 1,
-          })
-          .then(() => {
-            navigate(ROUTES.SIGN_IN);
-          });
+      .then(() => {
+        navigate(ROUTES.SIGN_IN);
       })
       .catch(error => {
         setUserData({ firstName: "", email: "", password: "" });
         setError("Failed to create an account");
+        console.log(error);
       });
 
     setLoading(false);
