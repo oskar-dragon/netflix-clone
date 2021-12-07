@@ -44,10 +44,13 @@ export const Title = styled.p`
   font-size: 1rem;
   color: #757575;
   margin-bottom: 2.5em;
+
+  ${Link} {
+    font-size: 1rem;
+  }
 `;
 
 export const Text = styled.p`
-  font-size: 0.8125rem;
   color: #757575;
   margin-bottom: 3.0769em;
 `;

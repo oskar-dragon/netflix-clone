@@ -9,3 +9,4 @@ Technologies Overview
 TODO:
 
 - [ ] Create Error Handling for password (Length, signs and so on)
+- [ ] 

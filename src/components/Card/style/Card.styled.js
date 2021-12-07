@@ -9,14 +9,24 @@ export const Title = styled.h2`
   margin-right: 2.333em;
 
   @media (max-width: 1000px) {
-    margin-left: 1.25em;
+    margin-left: 1.5em;
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 720px) {
+    margin-left: 1.8em;
+    font-size: 1rem;
   }
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 3.5em;
+  margin-bottom: 3em;
+
+  @media (max-width: 1000px) {
+    margin-bottom: 1.5em;
+  }
 
   &:last-of-type {
     margin-bottom: 0;
@@ -29,6 +39,12 @@ export const Group = styled.div`
     flexDirection === "row" ? "row" : "column"};
   ${({ alignItems }) => alignItems && `align-items: ${alignItems}`};
   ${({ margin }) => margin && `margin: ${margin}`};
+
+  > ${Container}:first-of-type {
+    @media (min-width: 1100px) {
+      margin-top: -150px;
+    }
+  }
 `;
 
 export const SubTitle = styled.h3`
@@ -53,6 +69,7 @@ export const Text = styled.p`
 export const Entities = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 0.4em;
 `;
 
 export const Meta = styled.div`
@@ -74,7 +91,6 @@ export const Image = styled.img`
 export const Item = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 1em;
   position: relative;
   cursor: pointer;
   transition: transform 0.2;
@@ -135,6 +151,10 @@ export const Feature = styled.div`
     font-size: 1.25rem;
     line-height: 1.25rem;
     margin-bottom: 0.5em;
+
+    @media (max-width: 1000px) {
+      font-size: 1.1rem;
+    }
   }
 
   ${FeatureText} {
